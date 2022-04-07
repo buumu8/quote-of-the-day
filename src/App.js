@@ -1,5 +1,5 @@
 import React from "react";
-import Quote from "./components/Quote/quote.container";
+import QuoteContainer from "./components/quote-container/quote-container.component";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./App.styles";
 import { theme } from "./infrastructure/theme";
@@ -10,7 +10,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyle />
       <div className="App">
-        <Quote />
+        <QuoteContainer />
       </div>
     </ThemeProvider>
   );

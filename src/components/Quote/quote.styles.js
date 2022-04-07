@@ -1,5 +1,15 @@
 import styled, { css } from "styled-components";
 
+export const QuoteTextContainer = styled.div`
+  font-size: ${(props) => props.theme.fontSizes.h5};
+  color: ${(props) => props.theme.colors.text.secondary};
+
+  /* Media Query: Tablet or Smaller */
+  @media screen and (max-width: 1000px) {
+    font-size: ${(props) => props.theme.fontSizes.h5};
+  }
+`;
+
 export const QuoteContainer = styled.div`
   width: auto;
   max-width: 900px;
@@ -7,11 +17,16 @@ export const QuoteContainer = styled.div`
   border-radius: ${(props) => props.theme.sizes[0]};
   background-color: rgba(255, 255, 255, 0.4);
   box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
+
+  @media screen and (max-width: 1000px) {
+    margin: auto ${(props) => props.theme.space[2]};
+  }
 `;
 
 export const QuoteText = styled.span`
   font-size: ${(props) =>
     props.long ? props.theme.fontSizes.h4 : props.theme.fontSizes.h3};
+  color: ${(props) => props.theme.colors.text.primary};
 `;
 
 export const QuoteAuthor = styled.span`
