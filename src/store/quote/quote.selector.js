@@ -1,7 +1,13 @@
-export const selectQuotes = (state) => {
-  return state.quote.quotes;
-};
+import { createSelector } from "reselect";
 
-export const selectIndex = (state) => {
-  return state.quote.index;
-};
+const selectQuoteReducer = (state) => state.quote;
+
+export const selectQuotes = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => quotesSlice.quotes
+);
+
+export const selectIndex = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => quotesSlice.index
+);
