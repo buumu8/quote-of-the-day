@@ -9,14 +9,20 @@ const INITIAL_STATE = {
     },
   ],
   index: 0,
+  isLoading: false,
+  error: null,
 };
 
 export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
   const { type, payload } = action;
 
   switch (type) {
-    case QUOTE_ACTION_TYPES.GET_ALL_QUOTES:
-      return { ...state, quotes: payload };
+    case QUOTE_ACTION_TYPES.FETCH_QUOTES_START:
+      return { ...state, isLoading: true };
+    case QUOTE_ACTION_TYPES.FETCH_QUOTES_SUCCESS:
+      return { ...state, quotes: payload, isLoading: false };
+    case QUOTE_ACTION_TYPES.FETCH_QUOTES_FAILED:
+      return { ...state, error: payload, isLoading: false };
     case QUOTE_ACTION_TYPES.SET_CURRENT_INDEX:
       return { ...state, index: payload };
     default:

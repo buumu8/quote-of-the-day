@@ -5,10 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCrown } from "@fortawesome/free-solid-svg-icons";
 import { faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { Spacer } from "../spacer/spacer.component";
+import Spinner from "../spinner/spinner.component";
 
-import { setIndex, setQuotes } from "../../store/quote/quote.action";
+import { setIndex, fetchQuotesAsync } from "../../store/quote/quote.action";
 
-import { selectQuotes, selectIndex } from "../../store/quote/quote.selector";
+import {
+  selectQuotes,
+  selectIndex,
+  selectQuotesIsLoading,
+} from "../../store/quote/quote.selector";
 
 import {
   QuoteContainer,
@@ -25,20 +30,11 @@ const Quote = () => {
 
   const quotes = useSelector(selectQuotes);
   const index = useSelector(selectIndex);
+  const isLoading = useSelector(selectQuotesIsLoading);
 
   useEffect(() => {
-    new Promise((resolve, response) => {
-      const apiUrl = "https://type.fit/api/quotes";
-      fetch(apiUrl)
-        .then((response) => response.json())
-        .then((result) => {
-          resolve(result);
-          dispatch(setQuotes(result));
-        })
-        .catch((e) => console.log(e));
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch(fetchQuotesAsync());
+  }, [dispatch]);
 
   const tweetQuote = () => {
     const twitterUrl = `https://twitter.com/intent/tweet?text=${quotes[index].text} - ${quotes[index].author}`;
@@ -50,7 +46,9 @@ const Quote = () => {
     dispatch(setIndex(newIndex));
   };
 
-  return (
+  return isLoading ? (
+    <Spinner />
+  ) : (
     <QuoteContainer>
       <QuoteTextContainer>
         <FontAwesomeIcon icon={faCrown} />

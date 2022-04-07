@@ -11,3 +11,8 @@ export const selectIndex = createSelector(
   [selectQuoteReducer],
   (quotesSlice) => quotesSlice.index
 );
+
+export const selectQuotesIsLoading = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => quotesSlice.isLoading
+);
