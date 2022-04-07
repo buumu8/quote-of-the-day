@@ -16,14 +16,12 @@ const Quote = () => (
   <QuoteContainer>
     {/* Quote */}
     <div className="quote-text">
-      <FontAwesomeIcon icon={faQuoteLeft} />
+      <FontAwesomeIcon icon={faQuoteLeft} size="2xl" />
       <QuoteText long>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Consectetur
-        accusamus dolore, harum odio optio nam praesentium architecto et
-        temporibus esse dolor suscipit vero cupiditate deleniti voluptate
-        ducimus, eligendi quae itaque.
+        Mollit elit irure cupidatat labore velit quis veniam tempor esse nisi
+        quis.
       </QuoteText>
-      <FontAwesomeIcon icon={faQuoteRight} />
+      <FontAwesomeIcon icon={faQuoteRight} size="2xl" />
     </div>
     {/* Author */}
     <QuoteAuthor>

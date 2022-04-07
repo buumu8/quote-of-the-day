@@ -1,8 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyle = createGlobalStyle`
-    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&family=Red+Hat+Display:wght@300&display=swap');
-
+    
     html {
         box-sizing: border-box;
     }
