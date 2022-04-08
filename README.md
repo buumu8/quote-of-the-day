@@ -2,14 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## LIBRARY USED
+## LIBRARY
 
 - ReactJS for frontend
   - Redux
   - Redux Thunk
 - NodeJS for backend with RESTful API
 
-## FUNCTIONS
+## FEATURES
 
 - Fetch quotes from server
 - Randomly select quote to display
@@ -18,5 +18,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## DEPLOYMENT
 
-Runs the app in the production mode.\
-On [Netlify](https://ornate-axolotl-b583db.netlify.app) to view it in your browser.
+Runs the app on [Netlify](https://ornate-axolotl-b583db.netlify.app) in your browser.
