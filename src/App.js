@@ -1,5 +1,5 @@
 import React from "react";
-import Quote from "./components/quote/quote.component";
+import { Quote } from "./components/quote/quote.component";
 import { GlobalStyle } from "./App.styles";
 
 // import "./App.scss";

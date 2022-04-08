@@ -25,7 +25,7 @@ import {
   QuoteTextContainer,
 } from "./quote.styles";
 
-const Quote = () => {
+export const Quote = () => {
   const dispatch = useDispatch();
 
   const quotes = useSelector(selectQuotes);
@@ -69,5 +69,3 @@ const Quote = () => {
     </QuoteContainer>
   );
 };
-
-export default Quote;
