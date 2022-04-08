@@ -28,7 +28,11 @@ export const QuoteAuthor = () => {
     <AuthorContainer>
       <AuthorImage src={imgSrc} />
       {wikiUrl ? (
-        <AuthorLink href={wikiUrl} target="_blank">
+        <AuthorLink
+          href={wikiUrl}
+          target="_blank"
+          alt="click to open wikipedia"
+        >
           - {author ?? "Unknown"} -
         </AuthorLink>
       ) : (
