@@ -1,6 +1,6 @@
 import React from "react";
 import { Quote } from "./components/quote/quote.component";
-import { GlobalStyle, AppTitle } from "./App.styles";
+import { GlobalStyle, AppTitle, Footer } from "./App.styles";
 
 // import "./App.scss";
 
@@ -10,6 +10,9 @@ function App() {
       <GlobalStyle />
       <AppTitle>Quote of the day</AppTitle>
       <Quote />
+      <Footer>
+        All right reserved &copy; {new Date().getFullYear()} Jettapol Tuetrakul
+      </Footer>
     </div>
   );
 }

@@ -24,6 +24,7 @@ export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
     case QUOTE_ACTION_TYPES.FETCH_WIKI_START:
       return { ...state, isLoading: true };
     case QUOTE_ACTION_TYPES.FETCH_QUOTES_SUCCESS: {
+      // First fetch quotes success
       const { quotes, index, author, text } = payload;
       return {
         ...state,
@@ -46,6 +47,7 @@ export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
         wiki: { imgSrc: null, wikiUrl: null },
       };
     case QUOTE_ACTION_TYPES.SET_CURRENT_INDEX: {
+      // Run every time user click next button
       const { quotes } = state;
       const author = quotes[payload].author ?? quotes[payload].author;
       const text = quotes[payload].text;

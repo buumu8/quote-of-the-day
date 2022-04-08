@@ -1,10 +1,32 @@
 import styled, { createGlobalStyle } from "styled-components";
 
 export const AppTitle = styled.h1`
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  text-align: center;
   color: ${(props) => props.theme.colors.brand.primary};
   font-size: ${(props) => props.theme.fontSizes.h2};
   font-weight: ${(props) => props.theme.fontWeights.bold};
   text-shadow: 1px 1px #000000;
+
+  @media screen and (max-width: 1000px) {
+    font-size: ${(props) => props.theme.fontSizes.h4};
+  }
+`;
+
+export const Footer = styled.div`
+  background-color: ${(props) => props.theme.colors.ui.primary};
+  width: 100%;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  color: ${(props) => props.theme.colors.text.inverse};
+  font-weight: 200;
+  text-align: center;
+  font-family: "TAHOMA";
+  font-size: ${(props) => props.theme.fontSizes.caption};
 `;
 
 export const GlobalStyle = createGlobalStyle`
@@ -26,20 +48,4 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         justify-content: center;
     }
-    
-    /* Loader */
-    .loader {
-        border: 16px solid #f3f3f3;
-        border-top: 16px solid #333;
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 2s linear infinite;
-    }
-
-    @keyframes spin {
-        0% { transform: rotate(0deg);}
-        100% { transform: rotate(360deg);}
-    }
-}
 `;
