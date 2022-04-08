@@ -1,11 +1,11 @@
 {
-  "name": "server",
+  "name": "netlify-exress",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "express/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js --experimental-fetch"
+    "start": "nodemon server-local.js --experimental-fetch",
+    "build": "netlify-lambda build express"
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +14,8 @@
     "body-parser": "^1.20.0",
     "cors": "^2.8.5",
     "express": "^4.17.3",
-    "nodemon": "^2.0.15"
+    "netlify-lambda": "^2.0.15",
+    "nodemon": "^2.0.15",
+    "serverless-http": "^3.0.1"
   }
 }
