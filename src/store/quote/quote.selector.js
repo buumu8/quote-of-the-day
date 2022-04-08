@@ -12,7 +12,38 @@ export const selectIndex = createSelector(
   (quotesSlice) => quotesSlice.index
 );
 
+export const selectAuthor = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => {
+    return quotesSlice.author;
+  }
+);
+
+export const selectText = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => {
+    return quotesSlice.text;
+  }
+);
+
 export const selectQuotesIsLoading = createSelector(
   [selectQuoteReducer],
   (quotesSlice) => quotesSlice.isLoading
 );
+
+export const selectWiki = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => {
+    return quotesSlice.wiki;
+  }
+);
+
+export const selectImgSrc = createSelector([selectWiki], (wikiSlice) => {
+  if (wikiSlice) return wikiSlice.imgSrc;
+  else return null;
+});
+
+export const selectWikiUrl = createSelector([selectWiki], (wikiSlice) => {
+  if (wikiSlice) return wikiSlice.wikiUrl;
+  else return null;
+});

@@ -2,69 +2,68 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCrown } from "@fortawesome/free-solid-svg-icons";
-import { faTwitter } from "@fortawesome/free-brands-svg-icons";
-import { Spacer } from "../spacer/spacer.component";
-import Spinner from "../spinner/spinner.component";
 
-import { setIndex, fetchQuotesAsync } from "../../store/quote/quote.action";
+import { faTwitter } from "@fortawesome/free-brands-svg-icons";
+
+import Spinner from "../spinner/spinner.component";
+import { QuoteText } from "../quote-text/quote-text.component";
+import { QuoteAuthor } from "../quote-author/quote-author.component";
+
+import {
+  changeIndex,
+  fetchQuotesAsync,
+  fetchWikiAsync,
+} from "../../store/quote/quote.action";
 
 import {
   selectQuotes,
-  selectIndex,
   selectQuotesIsLoading,
+  selectText,
+  selectAuthor,
 } from "../../store/quote/quote.selector";
 
 import {
   QuoteContainer,
-  QuoteText,
-  QuoteAuthor,
   ButtonContainer,
   Button,
   TwitterButton,
-  QuoteTextContainer,
 } from "./quote.styles";
 
 export const Quote = () => {
   const dispatch = useDispatch();
 
+  const text = useSelector(selectText);
+  const author = useSelector(selectAuthor);
   const quotes = useSelector(selectQuotes);
-  const index = useSelector(selectIndex);
   const isLoading = useSelector(selectQuotesIsLoading);
 
   useEffect(() => {
     dispatch(fetchQuotesAsync());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const tweetQuote = () => {
-    const twitterUrl = `https://twitter.com/intent/tweet?text=${quotes[index].text} - ${quotes[index].author}`;
+    const twitterUrl = `https://twitter.com/intent/tweet?text=${text} - ${author}`;
     window.open(twitterUrl, "_blank");
   };
 
   const newQuote = () => {
     const newIndex = Math.floor(Math.random() * quotes.length);
-    dispatch(setIndex(newIndex));
+    dispatch(changeIndex(newIndex));
+    dispatch(fetchWikiAsync(quotes[newIndex].author));
   };
 
   return isLoading ? (
     <Spinner />
   ) : (
     <QuoteContainer>
-      <QuoteTextContainer>
-        <FontAwesomeIcon icon={faCrown} />
-        <Spacer position="left" size="large">
-          <QuoteText>{quotes[index].text}</QuoteText>
-        </Spacer>
-        <FontAwesomeIcon icon={faCrown} flip="vertical" />
-      </QuoteTextContainer>
-      <QuoteAuthor>
-        <span className="author">- {quotes[index].author ?? "Unknown"} -</span>
-      </QuoteAuthor>
+      <QuoteText />
+      <QuoteAuthor />
       <ButtonContainer>
         <TwitterButton onClick={tweetQuote}>
           <FontAwesomeIcon icon={faTwitter} />
         </TwitterButton>
-        <Button onClick={newQuote}>New Quote</Button>
+        <Button onClick={newQuote}>Next</Button>
       </ButtonContainer>
     </QuoteContainer>
   );

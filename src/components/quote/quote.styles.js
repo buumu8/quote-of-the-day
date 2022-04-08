@@ -1,15 +1,5 @@
 import styled, { css } from "styled-components";
 
-export const QuoteTextContainer = styled.div`
-  font-size: ${(props) => props.theme.fontSizes.h5};
-  color: ${(props) => props.theme.colors.text.secondary};
-
-  /* Media Query: Tablet or Smaller */
-  @media screen and (max-width: 1000px) {
-    font-size: ${(props) => props.theme.fontSizes.h5};
-  }
-`;
-
 export const QuoteContainer = styled.div`
   width: auto;
   max-width: 900px;
@@ -21,23 +11,6 @@ export const QuoteContainer = styled.div`
   @media screen and (max-width: 1000px) {
     margin: auto ${(props) => props.theme.space[2]};
   }
-`;
-
-export const QuoteText = styled.span`
-  font-size: ${(props) =>
-    props.long ? props.theme.fontSizes.h4 : props.theme.fontSizes.h3};
-  color: ${(props) => props.theme.colors.text.primary};
-`;
-
-export const QuoteAuthor = styled.span`
-  margin-top: ${(props) => props.theme.space[3]};
-  font-size: ${(props) => props.theme.fontSizes.h4};
-  font-weight: ${(props) => props.theme.fontWeights.regular};
-  font-style: italic;
-  font-family: ${(props) => props.theme.fonts.headings}, sans-serif;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 `;
 
 export const ButtonContainer = styled.div`

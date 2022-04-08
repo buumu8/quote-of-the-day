@@ -11,6 +11,9 @@ const INITIAL_STATE = {
   index: 0,
   isLoading: false,
   error: null,
+  author: null,
+  text: null,
+  wiki: { imgSrc: null, wikiUrl: null },
 };
 
 export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
@@ -18,13 +21,36 @@ export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
 
   switch (type) {
     case QUOTE_ACTION_TYPES.FETCH_QUOTES_START:
+    case QUOTE_ACTION_TYPES.FETCH_WIKI_START:
       return { ...state, isLoading: true };
-    case QUOTE_ACTION_TYPES.FETCH_QUOTES_SUCCESS:
-      return { ...state, quotes: payload, isLoading: false };
+    case QUOTE_ACTION_TYPES.FETCH_QUOTES_SUCCESS: {
+      const { quotes, index, author, text } = payload;
+      return {
+        ...state,
+        quotes: quotes,
+        isLoading: false,
+        index: index,
+        author: author,
+        text: text,
+      };
+    }
+    case QUOTE_ACTION_TYPES.FETCH_WIKI_SUCCESS:
+      return { ...state, wiki: payload, isLoading: false };
     case QUOTE_ACTION_TYPES.FETCH_QUOTES_FAILED:
       return { ...state, error: payload, isLoading: false };
-    case QUOTE_ACTION_TYPES.SET_CURRENT_INDEX:
-      return { ...state, index: payload };
+    case QUOTE_ACTION_TYPES.FETCH_WIKI_FAILED:
+      return {
+        ...state,
+        error: payload,
+        isLoading: false,
+        wiki: { imgSrc: null, wikiUrl: null },
+      };
+    case QUOTE_ACTION_TYPES.SET_CURRENT_INDEX: {
+      const { quotes } = state;
+      const author = quotes[payload].author ?? quotes[payload].author;
+      const text = quotes[payload].text;
+      return { ...state, index: payload, author: author, text: text };
+    }
     default:
       return state;
   }

@@ -1,4 +1,11 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+
+export const AppTitle = styled.h1`
+  color: ${(props) => props.theme.colors.brand.primary};
+  font-size: ${(props) => props.theme.fontSizes.h2};
+  font-weight: ${(props) => props.theme.fontWeights.bold};
+  text-shadow: 1px 1px #000000;
+`;
 
 export const GlobalStyle = createGlobalStyle`
     
