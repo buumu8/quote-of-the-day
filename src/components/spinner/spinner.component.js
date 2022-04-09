@@ -1,4 +1,4 @@
-import { SpinnerOverlay, SpinnerContainer } from "./spinner.styles";
+import { SpinnerOverlay } from "./spinner.styles";
 import loader from "../../assets/loader.svg";
 
 const Spinner = () => (
