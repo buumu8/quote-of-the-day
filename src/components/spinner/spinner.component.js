@@ -4,7 +4,7 @@ import loader from "../../assets/loader.svg";
 const Spinner = () => (
   <SpinnerOverlay>
     {/* <SpinnerContainer /> */}
-    <img src={loader} />
+    <img src={loader} alt="loading" />
   </SpinnerOverlay>
 );
 
