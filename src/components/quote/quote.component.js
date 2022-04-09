@@ -39,6 +39,7 @@ export const Quote = () => {
 
   useEffect(() => {
     dispatch(fetchQuotesAsync());
+    throw new Error("woop");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

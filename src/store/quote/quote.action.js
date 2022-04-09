@@ -80,7 +80,6 @@ export const fetchWikiAsync = (author) => (dispatch) => {
         .then((response) => response.json())
         .then((result) => {
           resolve(result);
-          console.log(result);
           const data = result.query.pages;
           // Check if wiki page with author name exist
           const pageIds = Object.keys(data);
