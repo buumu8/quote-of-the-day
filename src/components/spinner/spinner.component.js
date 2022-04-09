@@ -1,8 +1,10 @@
 import { SpinnerOverlay, SpinnerContainer } from "./spinner.styles";
+import loader from "../../assets/loader.svg";
 
 const Spinner = () => (
   <SpinnerOverlay>
-    <SpinnerContainer />
+    {/* <SpinnerContainer /> */}
+    <img src={loader} />
   </SpinnerOverlay>
 );
 
