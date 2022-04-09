@@ -18,4 +18,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## DEPLOYMENT
 
-Runs the app on [Netlify](https://main--ornate-axolotl-b583db.netlify.app/) in your browser.
+Runs the app on [Netlify](https://aesthetic-khapse-aeef16.netlify.app/) in your browser.
