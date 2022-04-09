@@ -20,14 +20,12 @@ import {
   selectQuotesIsLoading,
   selectText,
   selectAuthor,
+  selectQuotesError,
 } from "../../store/quote/quote.selector";
 
-import {
-  QuoteContainer,
-  ButtonContainer,
-  Button,
-  TwitterButton,
-} from "./quote.styles";
+import { QuoteContainer, ButtonContainer } from "./quote.styles";
+
+import { Button } from "../button/button.component";
 
 export const Quote = () => {
   const dispatch = useDispatch();
@@ -36,10 +34,10 @@ export const Quote = () => {
   const author = useSelector(selectAuthor);
   const quotes = useSelector(selectQuotes);
   const isLoading = useSelector(selectQuotesIsLoading);
+  const error = useSelector(selectQuotesError);
 
   useEffect(() => {
     dispatch(fetchQuotesAsync());
-    throw new Error("woop");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -54,6 +52,13 @@ export const Quote = () => {
     dispatch(fetchWikiAsync(quotes[newIndex].author));
   };
 
+  useEffect(() => {
+    //throw error to error boundary
+    if (error) {
+      throw new Error(error);
+    }
+  }, [error]);
+
   return isLoading ? (
     <Spinner />
   ) : (
@@ -61,9 +66,9 @@ export const Quote = () => {
       <QuoteText />
       <QuoteAuthor />
       <ButtonContainer>
-        <TwitterButton onClick={tweetQuote}>
+        <Button isTwitter onClick={tweetQuote}>
           <FontAwesomeIcon icon={faTwitter} />
-        </TwitterButton>
+        </Button>
         <Button onClick={newQuote}>Next</Button>
       </ButtonContainer>
     </QuoteContainer>

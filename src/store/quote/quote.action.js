@@ -17,28 +17,29 @@ export const fetchQuotesFailed = (error) => ({
 
 export const fetchQuotesAsync = () => (dispatch) => {
   dispatch(fetchQuotesStart());
-  new Promise((resolve, reject) => {
-    const apiUrl = `${server}/quotes`;
-    // const apiUrl = "https://type.fit/api/quotes";
-    fetch(apiUrl)
-      .then((response) => response.json())
-      .then((result) => {
-        resolve(result);
-        const randomIndex = Math.floor(Math.random() * result.length);
-        const author = result[randomIndex].author ?? result[randomIndex].author;
-        const text = result[randomIndex].text;
-        const payload = {
-          quotes: result,
-          author: author,
-          text: text,
-          index: randomIndex,
-        };
-        dispatch(fetchQuotesSuccess(payload));
-        // Dispatch Fetch Wiki Info of first displayed quote
-        dispatch(fetchWikiAsync(author));
-      })
-      .catch((error) => dispatch(fetchQuotesFailed(error)));
-  });
+
+  const apiUrl = `${server}/quotes`;
+  // const apiUrl = "https://type.fit/api/quotes";
+
+  fetch(apiUrl)
+    .then((response) => response.json())
+    .then((result) => {
+      const randomIndex = Math.floor(Math.random() * result.length);
+      const author = result[randomIndex].author ?? result[randomIndex].author;
+      const text = result[randomIndex].text;
+      const payload = {
+        quotes: result,
+        author: author,
+        text: text,
+        index: randomIndex,
+      };
+      dispatch(fetchQuotesSuccess(payload));
+      // Dispatch Fetch Wiki Info of first displayed quote
+      dispatch(fetchWikiAsync(author));
+    })
+    .catch((error) => {
+      dispatch(fetchQuotesFailed(error));
+    });
 };
 
 export const changeIndex = (index) => {
@@ -67,40 +68,37 @@ export const fetchWikiAsync = (author) => (dispatch) => {
   } else {
     author = author.replaceAll(" ", "%20");
     // Fetch Wiki Info
-    new Promise((resolve, reject) => {
-      fetch(`${server}/wiki`, {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          author: author,
-        }),
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          resolve(result);
-          const data = result.query.pages;
-          // Check if wiki page with author name exist
-          const pageIds = Object.keys(data);
-          if (pageIds.length) {
-            const pageId = pageIds[0];
-            const info = data[pageId];
-            // Get Wiki Url
-            const url = info.fullurl;
-            // Get Wiki Thumbnail picture
-            const thumbnail = info.thumbnail;
-            let source = null;
-            if (thumbnail) {
-              source = thumbnail.source;
-            }
-            dispatch(fetchWikiSuccess({ imgSrc: source, wikiUrl: url }));
-          } else {
-            // Error if no wiki page found
-            dispatch(fetchWikiFailed("no page found"));
+    fetch(`${server}/wiki`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        author: author,
+      }),
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        const data = result.query.pages;
+        // Check if wiki page with author name exist
+        const pageIds = Object.keys(data);
+        if (pageIds.length) {
+          const pageId = pageIds[0];
+          const info = data[pageId];
+          // Get Wiki Url
+          const url = info.fullurl;
+          // Get Wiki Thumbnail picture
+          const thumbnail = info.thumbnail;
+          let source = null;
+          if (thumbnail) {
+            source = thumbnail.source;
           }
-        })
-        .catch((error) => dispatch(fetchWikiFailed(error)));
-    });
+          dispatch(fetchWikiSuccess({ imgSrc: source, wikiUrl: url }));
+        } else {
+          // Error if no wiki page found
+          dispatch(fetchWikiFailed("no page found"));
+        }
+      })
+      .catch((error) => dispatch(fetchWikiFailed(error)));
   }
 };

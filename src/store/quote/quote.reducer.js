@@ -33,6 +33,7 @@ export const quoteReducer = (state = INITIAL_STATE, action = {}) => {
         index: index,
         author: author,
         text: text,
+        error: null,
       };
     }
     case QUOTE_ACTION_TYPES.FETCH_WIKI_SUCCESS:

@@ -31,6 +31,11 @@ export const selectQuotesIsLoading = createSelector(
   (quotesSlice) => quotesSlice.isLoading
 );
 
+export const selectQuotesError = createSelector(
+  [selectQuoteReducer],
+  (quotesSlice) => quotesSlice.error
+);
+
 export const selectWiki = createSelector(
   [selectQuoteReducer],
   (quotesSlice) => {
