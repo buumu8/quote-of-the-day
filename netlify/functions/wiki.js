@@ -1,10 +1,11 @@
+const axios = require("axios");
+
 exports.handler = async function (event, context) {
   const { author } = JSON.parse(event.body);
-  fetch
+  axios
     .get(
       `http://en.wikipedia.org/w/api.php?action=query&titles=${author}&prop=pageimages|info&inprop=url&format=json&pithumbsize=100`
     )
-    .then((response) => response.json())
     .then((result) => {
       const data = result.data;
       return {
