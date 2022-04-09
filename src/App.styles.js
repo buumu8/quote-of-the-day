@@ -14,7 +14,7 @@ export const AppTitle = styled.h1`
   @media screen and (max-width: 1000px) {
     font-size: ${(props) => props.theme.fontSizes.body};
     text-align: left;
-    left: ${(props) => props.theme.space[1]};
+    left: ${(props) => props.theme.space[2]};
   }
 `;
 
