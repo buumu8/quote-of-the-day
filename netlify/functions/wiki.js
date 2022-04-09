@@ -6,9 +6,10 @@ exports.handler = async function (event, context) {
     )
     .then((response) => response.json())
     .then((result) => {
+      const data = result.data;
       return {
         statusCode: 200,
-        body: JSON.stringify({ message: result.data }),
+        body: JSON.stringify({ message: data }),
       };
     })
     .catch((e) => {
